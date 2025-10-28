@@ -18,6 +18,19 @@ class VolunteerProfile extends Model
         'total_hours',
     ];
 
+    protected $casts = [
+        'skills' => 'array',
+    ];
+
+    /**
+     * Get the user that owns the profile.
+        'user_id',
+        'address',
+        'skills',
+        'bio',
+        'total_hours',
+    ];
+
     /**
      * Get the user that owns the profile.
      */

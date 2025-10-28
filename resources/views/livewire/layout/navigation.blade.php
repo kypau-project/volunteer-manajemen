@@ -30,9 +30,17 @@ new class extends Component
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard') || request()->routeIs('volunteer.dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if(auth()->user()->isVolunteer())
+                        <x-nav-link :href="route('volunteer.profile.edit')" :active="request()->routeIs('volunteer.profile.edit')" wire:navigate>
+                            {{ __('Profil Relawan') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('volunteer.events.index')" :active="request()->routeIs('volunteer.events.index')" wire:navigate>
+                            {{ __('Daftar Acara') }}
+                        </x-nav-link>
+                    @endif
                     @if(auth()->user()->isCoordinator())
                         <x-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')" wire:navigate>
                             {{ __('Manajemen Acara') }}
@@ -86,9 +94,17 @@ new class extends Component
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard') || request()->routeIs('volunteer.dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if(auth()->user()->isVolunteer())
+                <x-responsive-nav-link :href="route('volunteer.profile.edit')" :active="request()->routeIs('volunteer.profile.edit')" wire:navigate>
+                    {{ __('Profil Relawan') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('volunteer.events.index')" :active="request()->routeIs('volunteer.events.index')" wire:navigate>
+                    {{ __('Daftar Acara') }}
+                </x-responsive-nav-link>
+            @endif
             @if(auth()->user()->isCoordinator())
                 <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')" wire:navigate>
                     {{ __('Manajemen Acara') }}
