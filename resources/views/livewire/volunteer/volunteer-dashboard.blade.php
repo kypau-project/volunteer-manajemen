@@ -35,6 +35,7 @@
                                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Tanggal</th>
                                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status Pendaftaran</th>
                                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Kehadiran</th>
+                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,10 +59,19 @@
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <span class="text-gray-900 whitespace-no-wrap">{{ $registration->attended ? 'Hadir' : 'Belum Hadir' }}</span>
                                         </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            @if($registration->attended && $registration->check_out && !$registration->feedback)
+                                                <a href="{{ route('volunteer.feedback.create', $registration) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-semibold">Beri Feedback</a>
+                                            @elseif($registration->feedback)
+                                                <span class="text-green-600 text-sm">Feedback Diberikan</span>
+                                            @else
+                                                <span class="text-gray-500 text-sm">-</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center text-gray-500">
+                                        <td colspan="5" class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center text-gray-500">
                                             Anda belum pernah mendaftar di acara manapun.
                                         </td>
                                     </tr>

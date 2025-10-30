@@ -45,6 +45,9 @@ new class extends Component
                         <x-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')" wire:navigate>
                             {{ __('Manajemen Acara') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('admin.reports.index')" :active="request()->routeIs('admin.reports.index')" wire:navigate>
+                            {{ __('Laporan & Export') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -108,6 +111,9 @@ new class extends Component
             @if(auth()->user()->isCoordinator())
                 <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')" wire:navigate>
                     {{ __('Manajemen Acara') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.reports.index')" :active="request()->routeIs('admin.reports.index')" wire:navigate>
+                    {{ __('Laporan & Export') }}
                 </x-responsive-nav-link>
             @endif
         </div>

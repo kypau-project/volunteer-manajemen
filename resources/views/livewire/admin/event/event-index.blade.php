@@ -66,6 +66,7 @@
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         {{-- Placeholder route --}}
                                         <a href="{{ route('admin.events.edit', $event) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <a href="{{ route('admin.events.attendance', $event) }}" class="text-blue-600 hover:text-blue-900 ml-4">Kehadiran</a>
                                         <button wire:click="deleteEvent({{ $event->id }})" class="text-red-600 hover:text-red-900 ml-4" onclick="return confirm('Anda yakin ingin menghapus acara ini?')">Hapus</button>
                                     </td>
                                 </tr>
