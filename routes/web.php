@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Event\EventIndex;
+use App\Models\Registration;
 use App\Livewire\Admin\Event\EventForm;
+use App\Livewire\Admin\EventCalendar;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +53,9 @@ Route::middleware(['auth', 'verified', 'role:admin,coordinator'])->prefix('admin
     // Feature 5: Dashboard Statistik
     Route::get('dashboard', \App\Livewire\Admin\DashboardStats::class)->name('dashboard');
 
+    // Feature 6: Kalender Acara
+    Route::get('calendar', \App\Livewire\Admin\EventCalendar::class)->name('calendar');
+
     // Event Management (Feature 1)
     Route::get("events", EventIndex::class)->name("events.index");
     Route::get("events/create", EventForm::class)->name("events.create");
@@ -60,6 +66,9 @@ Route::middleware(['auth', 'verified', 'role:admin,coordinator'])->prefix('admin
 
     // Feature 9: Laporan & Export
     Route::get("reports", \App\Livewire\Admin\ReportGenerator::class)->name("reports.index");
+
+    // Feature 11: Manajemen Peran & Permission
+    Route::get("users/roles", \App\Livewire\Admin\UserRoleManager::class)->name("users.roles");
 
     // Feature 10: Sistem Penghargaan
     Route::get("registrations/{registration}/certificate/generate", \App\Livewire\Admin\CertificateGenerator::class)->name("certificates.generate");

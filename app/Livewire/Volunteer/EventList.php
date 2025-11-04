@@ -7,6 +7,7 @@ use App\Models\Registration;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class EventList extends Component
 {
@@ -37,13 +38,17 @@ class EventList extends Component
         }
 
         // Create registration
-        Registration::create([
+        $registration = Registration::create([
             'user_id' => Auth::id(),
             'event_id' => $event->id,
             'status' => 'pending', // Default status is pending approval
         ]);
 
         session()->flash('message', 'Pendaftaran berhasil! Menunggu persetujuan koordinator.');
+
+        // Notifikasi ke Admin/Coordinator
+        $coordinators = \App\Models\User::whereIn('role', ['admin', 'coordinator'])->get();
+        \Illuminate\Support\Facades\Notification::send($coordinators, new \App\Notifications\NewRegistrationNotification($registration));
     }
 
     public function render()

@@ -40,6 +40,9 @@ class AttendanceManager extends Component
             'check_in' => now(),
             'status' => 'approved', // Set status to approved upon check-in
         ]);
+        
+        // Notifikasi ke Relawan
+        $registration->user->notify(new \App\Notifications\RegistrationStatusNotification($registration));
 
         session()->flash('message', 'Check-in berhasil untuk ' . $registration->user->name);
     }

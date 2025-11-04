@@ -45,15 +45,30 @@ new class extends Component
                         <x-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')" wire:navigate>
                             {{ __('Manajemen Acara') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('admin.calendar')" :active="request()->routeIs('admin.calendar')" wire:navigate>
+                            {{ __('Kalender Acara') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('admin.reports.index')" :active="request()->routeIs('admin.reports.index')" wire:navigate>
                             {{ __('Laporan & Export') }}
                         </x-nav-link>
+                        @if(auth()->user()->isAdmin())
+                            <x-nav-link :href="route('admin.users.roles')" :active="request()->routeIs('admin.users.roles')" wire:navigate>
+                                {{ __('Manajemen Peran') }}
+                            </x-nav-link>
+                        @endif
                     @endif
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <!-- Notification Bell -->
+                <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    @auth
+                        <livewire:layout.notification-bell />
+                    @endauth
+                </div>
+
+                <!-- Settings Dropdown -->
+                <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -112,9 +127,17 @@ new class extends Component
                 <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')" wire:navigate>
                     {{ __('Manajemen Acara') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.calendar')" :active="request()->routeIs('admin.calendar')" wire:navigate>
+                    {{ __('Kalender Acara') }}
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.reports.index')" :active="request()->routeIs('admin.reports.index')" wire:navigate>
                     {{ __('Laporan & Export') }}
                 </x-responsive-nav-link>
+                @if(auth()->user()->isAdmin())
+                    <x-responsive-nav-link :href="route('admin.users.roles')" :active="request()->routeIs('admin.users.roles')" wire:navigate>
+                        {{ __('Manajemen Peran') }}
+                    </x-responsive-nav-link>
+                @endif
             @endif
         </div>
 
